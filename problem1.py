@@ -13,22 +13,24 @@ from pyspark.sql.functions import (
 import pandas as pd
 import re
 
-def create_spark_session():
+master_url = sys.argv[1]
+
+def create_spark_session(master_url):
     """Create a Spark session"""
 
     spark = (
         SparkSession.builder
         .appName("Problem1")
-        .getOrCreate()
+        .master(master_url).getOrCreate()
     )
 
     print("✅ Spark session created successfully for Problem 1")
     return spark
 
 
-spark = create_spark_session()
+spark = create_spark_session(master_url)
 
-path = "data/sample/application_1485248649253_0052"
+path = "data/raw"
 
 def problem1(path=path):
     

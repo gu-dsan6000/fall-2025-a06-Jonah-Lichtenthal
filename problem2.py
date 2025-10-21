@@ -20,22 +20,25 @@ import re
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-def create_spark_session():
+
+master_url = sys.argv[1]
+
+def create_spark_session(master_url):
     """Create a Spark session"""
 
     spark = (
         SparkSession.builder
-        .appName("Problem1")
-        .getOrCreate()
+        .appName("Problem2")
+        .master(master_url).getOrCreate()
     )
 
     print("✅ Spark session created successfully for Problem 2")
     return spark
 
 
-spark = create_spark_session()
+spark = create_spark_session(master_url)
 
-path = "data/sample/application_1485248649253_0052"
+path = "data/raw"
 
 def problem2(path=path):
     
@@ -91,7 +94,7 @@ def problem2(path=path):
 
     df_cluster.toPandas().to_csv('problem2_cluster_summary.csv', index=False)
 
-    largest_cluster_id = df_cluster.toPandas().iloc[0]['cluster_id']
+    largest_cluster_id = df_cluster.orderBy(col("num_applications").desc()).first()["cluster_id"]
 
     print("✅Problem 2, Step 5: Aggregated cluster statistics")
 
@@ -139,16 +142,22 @@ def problem2(path=path):
 
 
 
-    density_df = df_time.select("application_id", "start_time", "end_time").where(col("cluster_id") == largest_cluster_id)
-
-
+    density_df = df_time.filter(col("cluster_id") == largest_cluster_id)
     density_pd = density_df.toPandas()
     density_pd['duration'] = (density_pd['end_time'] - density_pd['start_time']).dt.total_seconds() / 60
-    sns.kdeplot(density_pd['duration'], fill=True, color="skyblue", alpha=0.5)
-    plt.xlabel("Application Duration (minutes)")
-    plt.ylabel("Density")
-    plt.title(f"Application Duration Density for Cluster {largest_cluster_id}")
+
+
+
+    plt.clf()
+    plt.figure(figsize=(8, 6))
+    sns.histplot(density_pd["duration"], bins=30, kde=True, color="skyblue", alpha=0.6)
+    plt.xscale("log")
+    plt.xlabel("Application Duration (minutes, log scale)")
+    plt.ylabel("Frequency")
+    plt.title(f"Application Duration Distribution for Cluster {largest_cluster_id} (n={len(density_pd)})")
+    plt.tight_layout()
     plt.savefig("problem2_density_plot.png")
+
     print("✅Problem 2, Step 8: Density Plot")
 
     
@@ -162,16 +171,3 @@ problem2()
     
 
 
-
-
-
-
-
-
-
-
-
-
-
-#
-#
