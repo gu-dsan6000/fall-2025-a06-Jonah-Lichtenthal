@@ -96,12 +96,3 @@ problem1()
 
 
 
-
-#from pyspark.sql.functions import input_file_name
-
-# Extract from file path
-#df = logs_df.withColumn('file_path', input_file_name())
-#df = df.withColumn('application_id', regexp_extract('file_path', r'application_(\d+_\d+)', 0))
-#df = df.withColumn('container_id', regexp_extract('file_path', r'(container_\d+_\d+_\d+_\d+)', 1))
-
-
