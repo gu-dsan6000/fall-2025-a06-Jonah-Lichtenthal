@@ -66,15 +66,29 @@ def problem1(path=path):
     
 
     print(f"Total log lines processed: {logs_df.count()}")
-    print(f"Total lines with log levels: {logs_parsed.filter(col("log_level") != "").count()}")
+    print(f"Total lines with log levels: {logs_parsed.filter(col('log_level') != '').count()}")
     print(f"Unique log levels found: {log_counts.count()}")
 
     print("Log level distribution:")
-    print(f"INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]} {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count()} %")
-    print(f"ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]} {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count()} %")
-    print(f"WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]} {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count()} %")
-    print(f" : {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]} {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count()} %")
+    print(f"INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count():.2f} %)")
+    print(f"ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count():.2f} %)")
+    print(f"WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count():.2f} %)")
+    print(f"DEBUG: {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count():.2f} %)")
 
+    Summary = f"""
+    Total log lines processed: {logs_df.count()}
+    Total lines with log levels: {logs_parsed.filter(col('log_level') != '').count()}
+    Unique log levels found: {log_counts.count()}
+
+    Log level distribution:
+    INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count():.2f} %
+    ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count():.2f} %
+    WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count():.2f} %
+    DEBUG: {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count():.2f} %
+    """
+
+    with open ("problem1_summary.txt", "w") as outfile:
+        outfile.write(Summary)
     print("✅Problem 1, Step 5: Summary statistics")
 
 problem1()
