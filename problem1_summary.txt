@@ -4,8 +4,8 @@
     Unique log levels found: 4
 
     Log level distribution:
-    INFO : 1573  (0.82 %
-    ERROR : 14  (0.01 %
-    WARN : 14  (0.01 %
-    DEBUG: 310  (0.16 %
+    INFO : 1573  (0.82) %
+    ERROR : 14  (0.01) %
+    WARN : 14  (0.01) %
+    DEBUG: 310  (0.16) %
     

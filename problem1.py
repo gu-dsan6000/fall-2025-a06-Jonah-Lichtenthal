@@ -81,10 +81,10 @@ def problem1(path=path):
     Unique log levels found: {log_counts.count()}
 
     Log level distribution:
-    INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count():.2f} %
-    ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count():.2f} %
-    WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count():.2f} %
-    DEBUG: {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count():.2f} %
+    INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count():.2f}) %
+    ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count():.2f}) %
+    WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count():.2f}) %
+    DEBUG: {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count():.2f}) %
     """
 
     with open ("problem1_summary.txt", "w") as outfile:

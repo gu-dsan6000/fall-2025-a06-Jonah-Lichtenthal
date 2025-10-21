@@ -1,11 +1,11 @@
 message,log_level
-17/03/29 10:04:44 INFO ExecutorRunnable: Setting up ContainerLaunchContext,INFO
-17/03/29 10:11:15 INFO executor.CoarseGrainedExecutorBackend: Got assigned task 46,INFO
-  command:,
-17/03/29 10:09:41 INFO spark.MapOutputTrackerWorker: Doing the fetch; tracker endpoint = NettyRpcEndpointRef(spark://MapOutputTracker@10.10.34.11:48782),INFO
-17/03/29 10:03:25 INFO executor.Executor: Running task 0.0 in stage 6.0 (TID 103),INFO
-17/03/29 10:03:11 INFO storage.MemoryStore: MemoryStore started with capacity 17.7 GB,INFO
-17/03/29 10:03:22 INFO executor.CoarseGrainedExecutorBackend: Got assigned task 57,INFO
-"17/03/29 10:04:43 INFO YarnAllocator: Container request (host: Any, capability: <memory:28160, vCores:5>)",INFO
+17/03/29 10:05:00 INFO storage.BlockManager: Found block rdd_9_13 locally,INFO
+17/03/29 10:03:26 INFO executor.Executor: Running task 18.0 in stage 7.0 (TID 139),INFO
+    SPARK_YARN_STAGING_DIR -> .sparkStaging/application_1485248649253_0052,
 "17/03/29 09:55:47 INFO spark.MapOutputTrackerWorker: Don't have map outputs for shuffle 1, fetching them",INFO
-17/03/29 10:04:57 INFO storage.BlockManager: Found block rdd_2_7 locally,INFO
+"17/03/29 10:02:06 INFO spark.SecurityManager: Changing view acls to: yarn,curi",INFO
+    CLASSPATH -> {{PWD}}<CPS>{{PWD}}/__spark__.jar<CPS>$HADOOP_CONF_DIR<CPS>$HADOOP_COMMON_HOME/share/hadoop/common/*<CPS>$HADOOP_COMMON_HOME/share/hadoop/common/lib/*<CPS>$HADOOP_HDFS_HOME/share/hadoop/hdfs/*<CPS>$HADOOP_HDFS_HOME/share/hadoop/hdfs/lib/*<CPS>$HADOOP_YARN_HOME/share/hadoop/yarn/*<CPS>$HADOOP_YARN_HOME/share/hadoop/yarn/lib/*<CPS>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/*<CPS>$HADOOP_MAPRED_HOME/share/hadoop/mapreduce/lib/*<CPS>/usr/local/hadoop/etc/hadoop:/usr/local/hadoop/share/hadoop/common/lib/*:/usr/local/hadoop/share/hadoop/common/*:/usr/local/hadoop/share/hadoop/hdfs:/usr/local/hadoop/share/hadoop/hdfs/lib/*:/usr/local/hadoop/share/hadoop/hdfs/*:/usr/local/hadoop/share/hadoop/yarn/lib/*:/usr/local/hadoop/share/hadoop/yarn/*:/usr/local/hadoop/share/hadoop/mapreduce/lib/*:/usr/local/hadoop/share/hadoop/mapreduce/*:/contrib/capacity-scheduler/*.jar,
+17/03/29 10:04:27 ERROR executor.CoarseGrainedExecutorBackend: Driver 10.10.34.11:48782 disassociated! Shutting down.,ERROR
+"17/03/29 10:02:19 INFO storage.MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 1677.0 B, free 1677.0 B)",INFO
+17/03/29 10:03:26 INFO storage.ShuffleBlockFetcherIterator: Getting 20 non-empty blocks out of 20 blocks,INFO
+"17/03/29 10:05:07 INFO python.PythonRunner: Times: total = 5503, boot = -584, init = 6086, finish = 1",INFO
