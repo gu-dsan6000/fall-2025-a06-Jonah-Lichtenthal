@@ -1,0 +1,11 @@
+message,log_level
+===============================================================================,
+17/03/29 10:08:47 INFO executor.CoarseGrainedExecutorBackend: Got assigned task 94,INFO
+17/03/29 10:11:19 INFO executor.Executor: Finished task 14.0 in stage 6.0 (TID 114). 2271 bytes result sent to driver,INFO
+17/03/29 09:55:35 INFO executor.Executor: Starting executor ID 7 on host mesos-slave-07,INFO
+17/03/29 10:09:06 WARN executor.CoarseGrainedExecutorBackend: An unknown (mesos-master-1:48782) driver disconnected.,WARN
+17/03/29 10:03:21 INFO executor.Executor: Running task 6.0 in stage 2.0 (TID 28),INFO
+"17/03/29 10:05:12 INFO spark.MapOutputTrackerWorker: Don't have map outputs for shuffle 1, fetching them",INFO
+17/03/29 10:07:32 INFO util.Utils: Successfully started service 'sparkExecutorActorSystem' on port 58298.,INFO
+17/03/29 10:07:37 INFO storage.DiskBlockManager: Created local directory at /opt/hdfs/nodemanager/usercache/curi/appcache/application_1485248649253_0052/blockmgr-556b7f51-2858-4a94-a1c3-fd477a4132cf,INFO
+17/03/29 10:05:00 INFO executor.Executor: Starting executor ID 5 on host mesos-slave-13,INFO
