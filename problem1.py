@@ -30,13 +30,17 @@ def create_spark_session(master_url):
 
 spark = create_spark_session(master_url)
 
-path = "data/raw"
+path = "s3a://jgl72-assignment-spark-cluster-logs/data/**"
 
 def problem1(path=path):
     
     logs_df = spark.read.text(path)
 
     print("✅Problem 1, Step 1: Read log data")
+
+
+    print("✅ Showing sample raw lines:")
+    logs_df.show(5, truncate=False)
 
     logs_parsed = logs_df.select(
         regexp_extract('value', r'^(\d{2}/\d{2}/\d{2} \d{2}:\d{2}:\d{2})', 1).alias('timestamp'),
@@ -64,18 +68,27 @@ def problem1(path=path):
     print("✅Problem 1, Step 4: 10 random sample log entries with their levels")
 
 
-
-    
-
     print(f"Total log lines processed: {logs_df.count()}")
     print(f"Total lines with log levels: {logs_parsed.filter(col('log_level') != '').count()}")
     print(f"Unique log levels found: {log_counts.count()}")
 
+
+    info_count = log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]
+    error_count = log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]
+    warn_count = log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]
+    debug_count = log_counts.filter(col('log_level') == '').select('count').collect()[0][0]
+
+    info_percent = (info_count / logs_df.count()) * 100
+    error_percent = (error_count / logs_df.count()) * 100
+    warn_percent = (warn_count / logs_df.count()) * 100
+    debug_percent = (debug_count / logs_df.count()) * 100
+
     print("Log level distribution:")
-    print(f"INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count():.2f} %)")
-    print(f"ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count():.2f} %)")
-    print(f"WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count():.2f} %)")
-    print(f"DEBUG: {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count():.2f} %)")
+    print(f"INFO : {info_count}  ({info_percent:.2f} %)")
+    print(f"ERROR : {error_count}  ({error_percent:.2f} %)")
+    print(f"WARN : {warn_count}  ({warn_percent:.2f} %)")
+    print(f"DEBUG: {debug_count}  ({debug_percent:.2f} %)")
+
 
     Summary = f"""
     Total log lines processed: {logs_df.count()}
@@ -83,10 +96,10 @@ def problem1(path=path):
     Unique log levels found: {log_counts.count()}
 
     Log level distribution:
-    INFO : {log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'INFO').select('count').collect()[0][0]/logs_df.count():.2f}) %
-    ERROR : {log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'ERROR').select('count').collect()[0][0]/logs_df.count():.2f}) %
-    WARN : {log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == 'WARN').select('count').collect()[0][0]/logs_df.count():.2f}) %
-    DEBUG: {log_counts.filter(col('log_level') == '').select('count').collect()[0][0]}  ({log_counts.filter(col('log_level') == '').select('count').collect()[0][0]/logs_df.count():.2f}) %
+    INFO : {info_count}  ({info_percent:.2f} %)
+    ERROR : {error_count}  ({error_percent:.2f} %)
+    WARN : {warn_count}  ({warn_percent:.2f} %)
+    DEBUG: {debug_count}  ({debug_percent:.2f} %)
     """
 
     with open ("problem1_summary.txt", "w") as outfile:

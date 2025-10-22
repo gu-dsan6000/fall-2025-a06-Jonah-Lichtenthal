@@ -1,0 +1,11 @@
+message,log_level
+"17/06/09 11:52:21 INFO storage.MemoryStore: Block broadcast_3869 stored as values in memory (estimated size 9.9 KB, free 806.1 KB)",INFO
+"17/06/09 09:50:47 INFO python.PythonRunner: Times: total = 42, boot = 17, init = 25, finish = 0",INFO
+17/06/08 12:21:14 INFO output.FileOutputCommitter: Saved output of task 'attempt_201706081211_0274_m_000002_10963' to hdfs://10.10.34.11:9000/pjhe/test/5/_temporary/0/task_201706081211_0274_m_000002,INFO
+Update row: 519026,
+Update row: 480493,
+"17/06/08 20:32:01 INFO storage.MemoryStore: Block broadcast_10290_piece0 stored as bytes in memory (estimated size 5.8 KB, free 2.5 MB)",INFO
+17/06/10 15:19:08 INFO storage.BlockManager: Found block rdd_244_4 locally,INFO
+17/06/06 21:38:06 INFO executor.CoarseGrainedExecutorBackend: Got assigned task 5990,INFO
+"17/06/09 09:56:56 INFO python.PythonRunner: Times: total = 37, boot = -8, init = 45, finish = 0",INFO
+17/06/09 13:04:06 INFO storage.BlockManager: Found block rdd_18220_6 locally,INFO

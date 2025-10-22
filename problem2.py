@@ -21,6 +21,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 
 
+
 master_url = sys.argv[1]
 
 def create_spark_session(master_url):
@@ -38,7 +39,9 @@ def create_spark_session(master_url):
 
 spark = create_spark_session(master_url)
 
-path = "data/raw"
+path = "s3a://jgl72-assignment-spark-cluster-logs/data/**"
+
+
 
 def problem2(path=path):
     
@@ -167,7 +170,3 @@ def problem2(path=path):
 
 
 problem2()
-
-    
-
-
