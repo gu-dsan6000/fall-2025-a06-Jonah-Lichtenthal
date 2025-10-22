@@ -1,5 +1,5 @@
 
-# DSAN 6000: Assignment 6 — Spark Cluster Log Analysis  
+# DSAN 6000 Assignment 6: Spark Cluster Log Analysis  
 **Name:** Jonah Lichtenthal  
 **Date:** October 21, 2025  
 
@@ -57,9 +57,6 @@ All of this information was saved in csv or txt files for later analysis.
 
 
 Cluster Usage Patters: 
-
-
-- 
 
 - Execution time was about 11 minutes
 
@@ -127,7 +124,7 @@ Cluster 1460011102909: 1 applications
 ### Insights
 
 
-- Execution time was about 13 minutes
+- Execution time was about 13 minutes 
 
 Cluster Usage Patters: 
 
