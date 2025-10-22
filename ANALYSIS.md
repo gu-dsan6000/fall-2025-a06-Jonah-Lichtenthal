@@ -53,22 +53,48 @@ All of this information was saved in csv or txt files for later analysis.
 
 ### Insights
 
+- What I found is that the most common type of log contributing to 82.41% of logs is INFO which makes sense since usually we probably expect everything to run fine
+- Warn and Error and reasonably rare contributing to only 0.03% of logs each
+- Debug contains the remaining logs which is anything that is not a normal log or error/warning
 
 
-
-Cluster Usage Patters: 
+**Cluster Usage Patters:**
 
 - Execution time was about 11 minutes
 
-- Writing the summary definitely took the longest since it involved several counts and calculations, while printing the 10 random rows was the quickest step because it only processed a small subset of the data.
+- Writing the summary was the most time-consuming because it required several counts and calculations across the dataset, whereas printing the 10 random rows completed quickly since it only processed a small subset of the data.
 
 - Cluster version ran much faster than the local version because it distributed the data and computations across multiple nodes
 
-Spark UI secrrnshots
+
+**Spark UI secrrnshots:**
+
+<div align="center">
+Problem 1 MasterUI Screenshot
+</div>
+
+
+<p align="center">
+  <img src="images/Problem1_MasterUI.JPG" width="70%">
+</p>
+
+
+<div align="center">
+Problem 1 ApplicationUI Screenshot
+</div>
+
+<p align="center">
+  <img src="images/Problem1_ApplicationUI.JPG" width="70%">
+</p>
+
+
+- We can confirm from these screenshots that both cores of all 3 workers are in use solving the problem
+
+
 
 ### Optimizations
 
-I updated the summary section in Problem 1 to avoid recalculating the same values multiple times. The code now stores key results like counts and percentages in variables first, which makes it much faster.
+- I updated the summary section in Problem 1 to avoid recalculating the same values multiple times. The code now stores key results like counts and percentages in variables first, which makes it much faster.
 
 
 
@@ -103,17 +129,30 @@ The summery statistics I printed out are as follows:
 
 Total unique clusters: 6                                                        
 Total applications: 194                                                         
-Average applications per cluster: 32.33                                         
-Most heavily used clusters:
-Cluster 1485248649253: 181 applications                                         
-Cluster 1472621869829: 8 applications
-Cluster 1448006111297: 2 applications
-Cluster 1474351042505: 1 applications
-Cluster 1440487435730: 1 applications
-Cluster 1460011102909: 1 applications
+Average applications per cluster: 32.33     
+
+Most heavily used clusters:                                        
+    Cluster 1485248649253: 181 applications                                         
+    Cluster 1472621869829: 8 applications                                        
+    Cluster 1448006111297: 2 applications                                        
+    Cluster 1474351042505: 1 applications                                        
+    Cluster 1440487435730: 1 applications                                        
+    Cluster 1460011102909: 1 applications                                        
 
 
+The bar chart created:
 
+
+<p align="center">
+  <img src="data/output/problem2_bar_chart.png" width="70%">
+</p>
+
+
+The density plot created: 
+
+<p align="center">
+  <img src="data/output/problem2_density_plot.png" width="70%">
+</p>
 
 
 
@@ -126,15 +165,53 @@ Cluster 1460011102909: 1 applications
 
 - Execution time was about 13 minutes 
 
-Cluster Usage Patters: 
+- One cluster did the majority of the applications while 4/6 of the clusters barely did any applications
 
-Execution time observations: 
+- The bar chart visualizes just how imbalanced the work distribution was between the different clusters
 
-Comparison of local vs cluster performance: 
-
-
-Spark UI secrrnshots
+- The density plot shows that most of the applications ran very fast in the first couple minutes with only a couple allications causing the job to run so long. This also makes sense with our other following that many of our clusters did very few jobs which likely means the jobs those clusters did do were very computationally extensive.
 
 
-p2:
-changed how i got largest cluster id from getting the first row in a pandas data frame where I needed to convert the whole dataframe to pandas to just finding the first id of the ordered rows in spark
+**Cluster Usage Patters:**
+
+- Execution time was about 11 minutes
+
+- The group-by and summary steps were the most time-consuming because they required distributed shuffling and aggregation of data across executors, whereas finding the largest cluster ID completed quickly since it only accessed a single ordered record.
+
+- Cluster version ran much faster than the local version because it distributed the data and computations across multiple nodes
+
+
+**Spark UI secrrnshots:**
+
+<div align="center">
+Problem 2 MasterUI Screenshot
+</div>
+
+
+<p align="center">
+  <img src="images/problem2_Master_UI.JPG" width="70%">
+</p>
+
+
+<div align="center">
+Problem 2 ApplicationUI Screenshot
+</div>
+
+<p align="center">
+  <img src="images/problem2_ApplicationUI.JPG" width="70%">
+</p>
+
+
+- We can confirm from these screenshots that both cores of all 3 workers are in use solving the problem
+
+
+
+### Optimizations
+
+- Changed method for retrieving the largest cluster ID from converting the entire DataFrame to Pandas and selecting the first row to instead selecting the first ID directly from the ordered Spark DataFrame
+
+
+
+
+
+
